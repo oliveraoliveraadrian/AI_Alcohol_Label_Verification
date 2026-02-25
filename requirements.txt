@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 # Core UI and Data
 streamlit>=1.35.0
 pandas>=2.0.0
