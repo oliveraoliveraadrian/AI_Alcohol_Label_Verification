@@ -243,105 +243,108 @@ To scale the system for wider use, the following integrations are proposed:
 ```mermaid
 flowchart LR
 
-    %% =============================
-    %% USER ACCESS LAYER
-    %% =============================
-    subgraph USER_LAYER[" User Access Layer "]
-        U1[TTB Reviewer]
-        U2[Compliance Officer]
-        U3[Administrator]
-    end
+%% =============================
+%% USER ACCESS LAYER
+%% =============================
+subgraph USER_LAYER["User Access Layer"]
+    U1["TTB Reviewer"]
+    U2["Compliance Officer"]
+    U3["Administrator"]
+end
 
-    subgraph AUTH_LAYER[" Identity & Access Management "]
-        A1[Azure AD / Entra ID]
-        A2[PIV / CAC Authentication]
-        A3[Role-Based Access Control]
-    end
+subgraph AUTH_LAYER["Identity and Access Management"]
+    A1["Azure AD Entra ID"]
+    A2["PIV CAC Authentication"]
+    A3["Role Based Access Control"]
+end
 
-    U1 --> A1
-    U2 --> A1
-    U3 --> A1
-    A1 --> A2 --> A3
+U1 --> A1
+U2 --> A1
+U3 --> A1
+A1 --> A2
+A2 --> A3
 
-    %% =============================
-    %% APPLICATION LAYER
-    %% =============================
-    subgraph APP_LAYER[" Application Layer (Containerized) "]
-        S1[Frontend UI<br>Streamlit / React]
-        S2[API Gateway]
-        S3[Compliance Verification Engine]
-        S4[Human Override Workflow Engine]
-    end
+%% =============================
+%% APPLICATION LAYER
+%% =============================
+subgraph APP_LAYER["Application Layer Containerized"]
+    S1["Frontend UI Streamlit or React"]
+    S2["API Gateway"]
+    S3["Compliance Verification Engine"]
+    S4["Human Override Workflow Engine"]
+end
 
-    A3 --> S1
-    S1 --> S2 --> S3
-    S3 --> S4
+A3 --> S1
+S1 --> S2
+S2 --> S3
+S3 --> S4
 
-    %% =============================
-    %% PROCESSING LAYER
-    %% =============================
-    subgraph PROCESSING_LAYER[" AI & Document Processing Layer "]
-        P1[Azure AI Document Intelligence]
-        P2[EasyOCR Engine]
-        P3[Computer Vision Service<br>Stroke Width Analysis]
-        P4[Fuzzy Matching Service]
-        P5[Health Warning Validation Module]
-    end
+%% =============================
+%% PROCESSING LAYER
+%% =============================
+subgraph PROCESSING_LAYER["AI and Document Processing Layer"]
+    P1["Azure AI Document Intelligence"]
+    P2["EasyOCR Engine"]
+    P3["Computer Vision Stroke Width Analysis"]
+    P4["Fuzzy Matching Service"]
+    P5["Health Warning Validation Module"]
+end
 
-    S3 --> P1
-    S3 --> P2
-    S3 --> P3
-    S3 --> P4
-    S3 --> P5
+S3 --> P1
+S3 --> P2
+S3 --> P3
+S3 --> P4
+S3 --> P5
 
-    %% =============================
-    %% DATA LAYER
-    %% =============================
-    subgraph DATA_LAYER[" Secure Data Layer "]
-        D1[(Azure Blob Storage<br>Encrypted at Rest)]
-        D2[(Application Metadata DB<br>Azure SQL)]
-        D3[(Vector Database<br>ChromaDB / Azure AI Search)]
-        D4[(Audit Log Store<br>Immutable Storage)]
-    end
+%% =============================
+%% DATA LAYER
+%% =============================
+subgraph DATA_LAYER["Secure Data Layer"]
+    D1["Azure Blob Storage Encrypted"]
+    D2["Application Metadata Database Azure SQL"]
+    D3["Vector Database ChromaDB or Azure AI Search"]
+    D4["Immutable Audit Log Store"]
+end
 
-    P1 --> D1
-    P2 --> D1
-    P4 --> D3
-    S3 --> D2
-    S4 --> D4
+P1 --> D1
+P2 --> D1
+P4 --> D3
+S3 --> D2
+S4 --> D4
 
-    %% =============================
-    %% GOVERNANCE & MONITORING
-    %% =============================
-    subgraph GOVERNANCE_LAYER[" Governance, Security & Monitoring "]
-        G1[Azure Monitor]
-        G2[Security Information & Event Management (SIEM)]
-        G3[Model Risk Management Dashboard]
-        G4[Compliance Reporting Engine]
-    end
+%% =============================
+%% GOVERNANCE AND MONITORING
+%% =============================
+subgraph GOVERNANCE_LAYER["Governance Security and Monitoring"]
+    G1["Azure Monitor"]
+    G2["SIEM Security Information and Event Management"]
+    G3["Model Risk Management Dashboard"]
+    G4["Compliance Reporting Engine"]
+end
 
-    S3 --> G1
-    S3 --> G2
-    D4 --> G2
-    G1 --> G3
-    G3 --> G4
+S3 --> G1
+S3 --> G2
+D4 --> G2
+G1 --> G3
+G3 --> G4
 
-    %% =============================
-    %% INFRASTRUCTURE
-    %% =============================
-    subgraph INFRA_LAYER[" Infrastructure (FedRAMP Authorized Environment) "]
-        I1[Azure Kubernetes Service (AKS)]
-        I2[Private VNet]
-        I3[Key Vault]
-        I4[Encryption at Transit (TLS 1.2+)]
-    end
+%% =============================
+%% INFRASTRUCTURE
+%% =============================
+subgraph INFRA_LAYER["Infrastructure FedRAMP Environment"]
+    I1["Azure Kubernetes Service"]
+    I2["Private Virtual Network"]
+    I3["Key Vault"]
+    I4["TLS Encryption in Transit"]
+end
 
-    S1 --> I1
-    S2 --> I1
-    S3 --> I1
-    D1 --> I2
-    D2 --> I2
-    I1 --> I3
-    I1 --> I4
+S1 --> I1
+S2 --> I1
+S3 --> I1
+D1 --> I2
+D2 --> I2
+I1 --> I3
+I1 --> I4
+```
 
 **Note**: This application is designed for compliance verification assistance. Final approval decisions should always involve qualified human reviewers familiar with TTB regulations.
