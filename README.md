@@ -2,6 +2,29 @@
 
 An intelligent compliance verification system that automates the review of alcohol beverage labels against TTB (Alcohol and Tobacco Tax and Trade Bureau) application forms using advanced OCR, computer vision, and fuzzy matching algorithms.
 
+## Prototype Positioning & Assumptions
+
+- This is a **functional prototype** demonstrating the *“art of the possible.”* It validates capability, not final production design.
+- The **consumption model** (chatbot, API, standalone app, or integration into an existing system) will be defined during system integration and workflow design based on user needs.
+- Current **architecture and components are subject to change** based on final functional, technical, and compliance requirements. Additional AI/ML components may be incorporated to enhance accuracy and value.
+
+## Performance (Initial Assessment)
+
+- Target: **300 images processed in <5 seconds per label (initial assessment).**
+- Performance can be improved through parallelization, GPU acceleration, batching, or additional compute resources.
+- Final benchmarks will depend on infrastructure, image quality, and workload.
+
+## Security, Governance & Compliance
+
+- A formal **security and AI governance model** will be defined during the initial implementation phase.
+- Includes access control, audit logging, monitoring, drift detection, and refinement loops.
+- Future state will provide **plain-language compliance rationale** for failed checks to improve transparency and reviewer efficiency.
+
+## Validation & Deployment Readiness
+
+- Pre-release testing will validate accuracy, performance, and edge cases prior to deployment.
+- Continuous monitoring and model refinement will ensure long-term compliance, reliability, and performance.
+
 ## System Architecture
 
 ```mermaid
