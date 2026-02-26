@@ -25,6 +25,7 @@ label/
 venv/
 ENV/
 env/
+.venv/
 
 # IDE
 .vscode/

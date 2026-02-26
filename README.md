@@ -176,8 +176,8 @@ The application will open in your default browser at `http://localhost:8501`
 - Multi-tab workflow orchestration
 - Results visualization and export
 
-#### [`rag_system.py`](rag_system.py)
-- **RAGSystem Class**: Core verification engine
+#### [`lib_system.py`](lib_system.py)
+- **SystemLib Class**: Core verification engine
 - **OCR Processing**: EasyOCR integration
 - **Bold Detection**: CV-based stroke width analysis using Distance Transform
 - **Fuzzy Matching**: thefuzz library for text comparison
@@ -219,16 +219,16 @@ See [`requirements.txt`](requirements.txt) for complete list. Key dependencies:
 ## Configuration
 
 ### Field Configuration
-Modify `FIELD_CONFIG` in [`rag_system.py`](rag_system.py:14-22) to adjust:
+Modify `FIELD_CONFIG` in [`lib_system.py`](lib_system.py:14-22) to adjust:
 - Field extraction keywords
 - Field labels
 - Extraction order
 
 ### Health Warning Text
-Update `HWS_MASTER_TEXT` in [`rag_system.py`](rag_system.py:24-29) to match current regulatory requirements.
+Update `HWS_MASTER_TEXT` in [`lib_system.py`](lib_system.py:24-29) to match current regulatory requirements.
 
 ### Bold Detection Sensitivity
-Adjust the ratio threshold in [`_is_bold()`](rag_system.py:73) method:
+Adjust the ratio threshold in [`_is_bold()`](lib_system.py:73) method:
 ```python
 return ratio > 0.04  # Increase for stricter bold detection
 ```

@@ -12,7 +12,7 @@ from PyPDF2 import PdfReader
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import multiprocessing
 
-class RAGSystem:
+class SystemLib:
     FIELD_CONFIG = [
         {"id": "brand", "label": "Brand Name", "keywords": ["brand name"]},
         {"id": "type", "label": "Class/Type", "keywords": ["class/type designation", "class/type"]},

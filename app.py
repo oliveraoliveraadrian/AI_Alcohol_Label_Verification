@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
-from rag_system import RAGSystem
+from lib_system import SystemLib
 import datetime
 import time
 
 st.set_page_config(page_title="AI Alcohol Label Verification", layout="wide")
 
-if "rag" not in st.session_state:
+if "slib" not in st.session_state:
     with st.spinner("Initializing Local OCR & CV Engine..."):
-        st.session_state.rag = RAGSystem()
+        st.session_state.slib = SystemLib()
 
 if "all_results" not in st.session_state:
     st.session_state.all_results = []
@@ -40,12 +40,12 @@ with tab1:
             # Use batch processing for faster ingestion
             if len(app_files) > 5:
                 status_text.text(f"Batch processing {len(app_files)} applications...")
-                st.session_state.rag.ingest_documents_batch(app_files)
+                st.session_state.slib.ingest_documents_batch(app_files)
                 progress_bar.progress(1.0)
             else:
                 for i, f in enumerate(app_files):
                     status_text.text(f"Indexing {f.name}...")
-                    st.session_state.rag.ingest_document(f)
+                    st.session_state.slib.ingest_document(f)
                     progress_bar.progress((i + 1) / len(app_files))
             
             elapsed = time.time() - start_time
@@ -76,7 +76,7 @@ with tab2:
     )
     
     if st.button("Start Analysis", type="primary"):
-        if label_files and st.session_state.rag.applications:
+        if label_files and st.session_state.slib.applications:
             st.session_state.all_results = []
             progress_bar = st.progress(0)
             status_text = st.empty()
@@ -85,12 +85,12 @@ with tab2:
             # Use batch processing for better performance
             if len(label_files) > 5:
                 status_text.text(f"Batch processing {len(label_files)} labels...")
-                st.session_state.all_results = st.session_state.rag.verify_labels_batch(label_files)
+                st.session_state.all_results = st.session_state.slib.verify_labels_batch(label_files)
                 progress_bar.progress(1.0)
             else:
                 for i, f in enumerate(label_files):
                     status_text.text(f"Analyzing {f.name}...")
-                    st.session_state.all_results.append(st.session_state.rag.verify_label(f))
+                    st.session_state.all_results.append(st.session_state.slib.verify_label(f))
                     progress_bar.progress((i + 1) / len(label_files))
             
             elapsed = time.time() - start_time
@@ -216,7 +216,7 @@ with tab2:
 with st.sidebar:
     st.header("System")
     if st.button("Clear Cache & Library"):
-        st.session_state.rag.clear_library()
+        st.session_state.slib.clear_library()
         st.session_state.all_results = []
         st.session_state.uploader_key += 1 
         st.rerun()
